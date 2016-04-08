@@ -1,17 +1,16 @@
-package myIndenter;
 public class JavaLine {
 
 	private String javaVar="";		// Java Code
 	private String commentVar="";	// Code Comment
 	private int javaLen=0;			// Length of Code
-	  
+
 	public JavaLine(String strLine, int bracketCount){
-		
+
 		if (!strLine.equals("")){
 		subSplit(strLine, bracketCount);
 		}
 	}
-	
+
 	private void subSplit(String strLine, int bracketCount){
 		int i = 0, x = 0;
 		String strIndent="";
@@ -85,30 +84,30 @@ public class JavaLine {
 
 			commentVar = "";
 		}
-		
+
 		if (Main.blockComment == true){
 			// detect \maybe
-			
-			
-			
+
+
+
 			javaVar = "";
 			strIndent = indentJava(bracketCount);
 			javaVar = strIndent + javaVar;
 			strLine = strLine.trim();
-			
+
 			commentVar = strLine.substring(0, strLine.length());
-			
-			
+
+
 		}
 	}
-	
-	
+
+
 	public int getJavaLineLength(){
 		int length = javaVar.length();
 		javaLen = javaVar.length();
 	return length;
 	}
-	
+
     public static String countSpaces(int value){
     	String retVal = "";
     	  for (int x = 0; x < value; x++){
@@ -116,7 +115,7 @@ public class JavaLine {
 		  }
     return retVal;
     }
-    
+
     private static String indentJava(int bracketCount){
     	String strIndent="";
 		 for (int y = 0; y < bracketCount; y++){
@@ -124,7 +123,7 @@ public class JavaLine {
 	 	 }
 	return strIndent;
     }
-	
+
 	public String returnLineWithCommentAt(int index){
 		String stringOfSpaces="";
 		int value=0;
@@ -134,11 +133,11 @@ public class JavaLine {
 		value = index - javaLen;
 		 stringOfSpaces = countSpaces(value); //Replace 1
 		 strRetLine = javaVar + stringOfSpaces + commentVar;
-		
+
 	return strRetLine;
 	}
-	
+
 	public String toString(){
 	return "JavaLine(String strLine, bracketCount)";
-	}	
+	}
 }

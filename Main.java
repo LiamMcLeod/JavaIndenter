@@ -1,4 +1,3 @@
-package myIndenter;
 import java.util.*;
 /**
  * Java indenter of // comments.
@@ -15,7 +14,7 @@ class Main {
   // The stored Java program
   private ArrayList<JavaLine> program = new ArrayList<>();
   public static Scanner userInput = new Scanner(System.in);
-  
+
   //  Flag for braces and a single pass
   public static boolean blnFlag=false;
   private boolean blnCheck=false;
@@ -26,7 +25,7 @@ class Main {
   /**
    * @param args Arguments passed to program (ignored)
    */
-  
+
   // Should be public static when initiated from itself
   public static void main( String args[] ){
     ( new Main() ).process();
@@ -46,28 +45,28 @@ class Main {
    * the data structure program
    */
   private void readProgram(){
-	  
+
 	  // BIO.getString  == userInput.nextLine();
 	  // String strLine = BIO.getString();
 	  // !BIO.eof
 	  // OR .hasNext();
 	  //	while (userInput.hasNextLine())
-	
+
 	  int bracketCount=0;
-	  
+
 	while (userInput.hasNextLine()){
 		String strLine = userInput.nextLine();
 		// Boolean flag to signify the fact that it hasn't yet
 		//reached a single bracket. Maybe
 		if (strLine.equals("") && bracketCount == 0){
-	        break; 
+	        break;
 		}
 		if (!strLine.equals("")){
-		
+
 		bracketCount = checkFlags(strLine, bracketCount);
-		
+
 		blockComment = checkBlock(strLine);
-		
+
 		bracketCount = checkChars(strLine, bracketCount);
 		if (blnFlag == false) {
 		bracketCount = checkBrackets(strLine, bracketCount);
@@ -78,7 +77,7 @@ class Main {
 
     }
   }
- 
+
   private int checkFlags(String strLine, int bracketCount){
 	  if (blnFlag==true && strLine.indexOf("{") > -1) {						//|| strLine.contains("case"))
 			// Bracket
@@ -96,10 +95,10 @@ class Main {
 				blnCheck = false;
 			}
 			else if (blnCheck == true && !strLine.contains("break;")){
-				
+
 				blnCheck = true;
 			}
-			
+
 		}
 	  if (blockComment == true && commentFlag == true){
 			blockComment = false;
@@ -110,71 +109,71 @@ class Main {
 			if (strLine.indexOf('*') > -1){
 				if (v+1 < strLine.length()){
 					if (strLine.charAt(v+1) == '/'){
-						
+
 							blockComment = true;
 							commentFlag = true;
 					}
 				}
 			}
 		}
-	
+
 			// No Bracket
 //			blnFlag=false;
 
   return bracketCount;
   }
-  
+
   private static int checkBrackets(String strLine, int bracketCount){
 	  // boolean maybe
 	  boolean speechDetected = false;
-	  if  (strLine.indexOf("\"") > -1 ) {		
+	  if  (strLine.indexOf("\"") > -1 ) {
 		  speechDetected = true;
 		  //index of { OR  } > lastIndex of '"'
 	  }
-	  
+
 	  if (speechDetected == false ){
-		
+
 		if (strLine.indexOf("{") > -1) {
 			 bracketCount++;
 		 }
 		else {
-			
+
 		}
-	  
+
 		if (strLine.indexOf("}") > -1) {
 			bracketCount--;
 		}
-	
+
 	  }
 	  else {
 		if (strLine.lastIndexOf("\"") < strLine.lastIndexOf("{")){
-			
+
 				 bracketCount++;
-			 
-		
-		
+
+
+
 		}
 		if (strLine.lastIndexOf("\"") < strLine.lastIndexOf("}")) {
-		  
-		
+
+
 				bracketCount--;
-			
+
 		}
 	  }
   return bracketCount;
   }
-  
+
   private int checkChars(String strLine, int bracketCount) {
-	  String checkChar; 
-	  
+	  String checkChar;
+
 		strLine = strLine.trim();
 	if (strLine.length() > 3){
 		checkChar = strLine.charAt(0) + "" + strLine.charAt(1) + "" + strLine.charAt(2);
-		
+
 		if (strLine.indexOf("{") == -1) {
-		// adjust later 
+		// adjust later
 		// Regex maybe?
-			
+
 			if (checkChar.equals("do ") || checkChar.equals("do(") || checkChar.equals("for") || checkChar.equals("whi") || checkChar.equals("if ") || checkChar.equals("els") || checkChar.equals("if(") || checkChar.equals("try") || checkChar.equals("cat") || checkChar.equals("swi") || checkChar.equals("cas")) {
 				bracketCount++;
 				blnFlag = true;
@@ -183,7 +182,7 @@ class Main {
 	}
   return bracketCount;
   }
-  
+
   private static boolean checkBlock(String strLine){
 	 int i = strLine.indexOf('/');
 	 boolean temp = blockComment;
@@ -191,7 +190,7 @@ class Main {
 		 if (i+1 < strLine.length()){
 			if (strLine.charAt(i+1) == '*'){
 				// Block Comment Detected
-				temp = true;			
+				temp = true;
 			}
 
 		 }
