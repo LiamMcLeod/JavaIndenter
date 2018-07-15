@@ -1,5 +1,4 @@
 # Java Formatter
-by dual1ty
 
 This was a simple java application for formatting Java code. It was a mini-project made for my Introduction to Object Oriented Programming module at university.
 
